@@ -9,17 +9,23 @@ import io
 # Flask app
 app = Flask(__name__)
 
-# Google Drive model URL
-GDRIVE_URL = "https://drive.google.com/uc?id=1yWREM-1IgbBqx4hY43ciMaJrFTs83Nhd"
-MODEL_PATH = "efficient_model.keras"
+# Google Drive TFLite model URL
+GDRIVE_URL = "https://drive.google.com/uc?id=1o4y1x9UG4ZS8D0fstDsfOsG5yUFSNRb1"
+MODEL_PATH = "efficient_model.tflite"
 
 # Download the model if it doesn't exist
 if not os.path.exists(MODEL_PATH):
     print("Downloading model...")
     gdown.download(GDRIVE_URL, MODEL_PATH, quiet=False)
 
-# Load model
-model = tf.keras.models.load_model(MODEL_PATH)
+# Load TFLite model and create interpreter
+interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
+interpreter.allocate_tensors()
+
+# Define input and output tensor details
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
 
 # Define class labels (ensure this matches your model's output order)
 class_labels = [
