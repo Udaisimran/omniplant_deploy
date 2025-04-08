@@ -6,7 +6,7 @@ import os
 import io
 import gdown
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 # Path to save the TFLite model
 model_path = "model.tflite"
