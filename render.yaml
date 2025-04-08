@@ -3,7 +3,7 @@
 - item3: name: omni-plant-api
 - item4: env: python
 - item5: buildCommand: "pip install -r requirements.txt"
-- item6: startCommand: "gunicorn omniplant:app"
+- item6: startCommand: "gunicorn app:app"
 - item7: envVars:
 - item8: - key: PYTHON_VERSION
 - item9: value: 3.12.2
