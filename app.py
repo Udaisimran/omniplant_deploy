@@ -36,7 +36,10 @@ class_labels = [
     "Tomato___Spider_mites Two-spotted_spider_mite", "Tomato___Target_Spot", "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
     "Tomato___Tomato_mosaic_virus", "Tomato___healthy"
 ]
-
+# Route for testing if the app is running
+@app.route('/')
+def home():
+    return 'Welcome to the Plant Disease Prediction API!'
 # Preprocessing function
 def preprocess_image(image):
     image = image.resize((224, 224))  # Resize to match model input
