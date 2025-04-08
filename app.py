@@ -1,14 +1,25 @@
-from flask import Flask, request, jsonify
+import os
+import gdown
 import tensorflow as tf
+from flask import Flask, request, jsonify
 from PIL import Image
 import numpy as np
 import io
 
-# Initialize the Flask app
+# Flask app
 app = Flask(__name__)
 
-# Load the trained model
-model = tf.keras.models.load_model(r"C:\Users\Dell\omni_plant_\efficient_model.keras")
+# Google Drive model URL
+GDRIVE_URL = "https://drive.google.com/uc?id=1yWREM-1IgbBqx4hY43ciMaJrFTs83Nhd"
+MODEL_PATH = "efficient_model.keras"
+
+# Download the model if it doesn't exist
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model...")
+    gdown.download(GDRIVE_URL, MODEL_PATH, quiet=False)
+
+# Load model
+model = tf.keras.models.load_model(MODEL_PATH)
 
 # Define class labels (ensure this matches your model's output order)
 class_labels = [
